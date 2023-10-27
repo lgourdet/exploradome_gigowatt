@@ -166,8 +166,6 @@ void setup() {
 
   initInputLight();
   initInputButton();
-  //pinMode(ledPin, OUTPUT);
-  //pinMode(buttonPin, INPUT);
 }
 
 void loop() {
