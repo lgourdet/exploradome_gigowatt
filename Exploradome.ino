@@ -161,6 +161,22 @@ void initLightsOn(){
   //if(DEBUG) Serial.println(strOut + pinList);
 }
 
+// Fonction d'initialisation de la lumière des bouttons (Worker )
+void initLightsOff(){
+  int i;
+  String strOut = "[OFF] Pins : ";
+  String pinList = "";
+  String separator = "";
+
+  for(i = pinFirstWorkLight;i <= pinLastActionLight;i++){
+    if(i != 2) separator = ", ";
+    digitalWrite(i, LOW);
+    pinList = pinList + separator + i;
+  }
+  //if(DEBUG) Serial.println(strOut + pinList);
+}
+
+
 void setup() {
   Serial.begin(9600);
 
@@ -171,17 +187,17 @@ void setup() {
 void loop() {
   
   // Put all lights on
-  initLightsOn();
+  initLightsOff();
 
   // Getting the Pin ID related to the pushed button
   pinPushedID = getButtonPushed();
   
   // If a button is pushed
   if(pinPushedID != pinLastActionPush + 1 && pinPushedID != 0){   
-    // Light down the light attached to the pushed button
+    // Light on the light attached to the pushed button
     // -20 is the correspondance between the PIN link to the pushed button and his light
     // For exemple : If BIM Manager button is pushed (PIN ID 22) the PIN light 2 will be turned off
-    digitalWrite(pinPushedID-20, LOW);
+    digitalWrite(pinPushedID-20, HIGH);
 
     String strOut = "[PUSH2LIGHT] Value :";
     if(DEBUG) Serial.println(strOut + push2Light[pinPushedID]);
